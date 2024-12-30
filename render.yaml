@@ -6,6 +6,7 @@ services:
     buildCommand: |
       pip install --upgrade pip
       pip install -r requirements.txt
+      python manage.py collectstatic --noinput
     startCommand: gunicorn userproject.wsgi:application
     envVars:
       - key: SECRET_KEY
@@ -24,6 +25,5 @@ services:
         value: "3306"
       - key: ALLOWED_HOSTS
         value: "localhost,127.0.0.1,nsproject.onrender.com"
-    staticPublishPath: assets/
     healthCheckPath: /
     autoDeploy: true
