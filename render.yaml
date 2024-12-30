@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: nsproject-backend
+    env: python
+    region: oregon
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    startCommand: gunicorn userproject.wsgi:application
+    envVars:
+      - key: SECRET_KEY
+        value: django-insecure-u81ik313b$og#2ca9s9ap8x7c3cjsx)ply9v0+v(ejyqc2#b&-
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_NAME
+        value: project
+      - key: DATABASE_USER
+        value: root
+      - key: DATABASE_PASSWORD
+        value: Narendra@9102
+      - key: DATABASE_HOST
+        value: localhost
+      - key: DATABASE_PORT
+        value: "3306"
+      - key: ALLOWED_HOSTS
+        value: "localhost,127.0.0.1,nsproject.onrender.com"
+    staticPublishPath: assets/
+    healthCheckPath: /
+    autoDeploy: true
